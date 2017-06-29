@@ -8,10 +8,13 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="MyFullScreenTheme" parent="AppTheme">
-        <item name="android:windowFullscreen">true</item>
+    <style name="MyFullScreenTheme" parent="AppTheme.NoActionBar">
         <item name="android:windowNoTitle">true</item>
+        <!-- 兼容API 7-->
         <item name="android:windowActionBar">false</item>
+        <!-- Activity全屏 开始-->
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
     </style>
 
     <style name="AppTheme.NoActionBar">

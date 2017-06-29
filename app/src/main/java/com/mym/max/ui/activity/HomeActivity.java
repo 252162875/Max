@@ -1,35 +1,40 @@
 package com.mym.max.ui.activity;
 
+import android.graphics.Color;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 import com.jaeger.library.StatusBarUtil;
 import com.mym.max.R;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import me.majiajie.pagerbottomtabstrip.PageBottomTabLayout;
+import me.majiajie.pagerbottomtabstrip.item.BaseTabItem;
+
 public class HomeActivity extends AppCompatActivity {
+
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+    @BindView(R.id.pagebottomtablayout)
+    PageBottomTabLayout bottomTablayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        ButterKnife.bind(this);
         setSupportActionBar(toolbar);
-        StatusBarUtil.setTranslucentForCoordinatorLayout(HomeActivity.this, 50);
-        toolbar.setBackgroundColor(getResources().getColor(android.R.color.transparent));
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        StatusBarUtil.setColor(this, getResources().getColor(R.color.appMainColor), 0);
+        bottomTablayout.material()
+                .addItem(R.drawable.rb_me, R.drawable.rb_me_click, "影魔", getResources().getColor(R.color.appMainColor))
+                .addItem(R.drawable.rb_home, R.drawable.rb_home_click, "祈求着", getResources().getColor(R.color.appMainColor))
+                .addItem(R.drawable.ti5_off, R.drawable.ti5_on, "精灵龙", getResources().getColor(R.color.appMainColor))
+                .addItem(R.drawable.rb_discovery, R.drawable.rb_discovery_click, "幻影刺客", getResources().getColor(R.color.appMainColor))
+                .addItem(R.drawable.rb_video, R.drawable.rb_video_click, "末日使者", getResources().getColor(R.color.appMainColor)).build();
     }
 
     @Override
