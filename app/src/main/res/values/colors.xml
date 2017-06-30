@@ -5,5 +5,10 @@
     <color name="colorAccent">#FF4081</color>
 
     <color name="appMainColor">#141E28</color>
+    <color name="appAlpMainColor">#e70e1216</color>
     <color name="normalText">#666666</color>
+    <color name="homeBottomtabBg">#FEFEFE</color>
+    <color name="viewBg">#E1E6EB</color>
+    <color name="textColorLightGray">#646f7c</color>
+    <color name="textColorGold">#c79034</color>
 </resources>

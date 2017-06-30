@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--tag 保证唯一性的key-->
+    <item type="id" name="tag_first"/>
+    <item name="tag_multistateview" type="id"/>
+</resources>
