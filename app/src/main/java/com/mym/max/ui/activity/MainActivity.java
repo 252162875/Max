@@ -2,6 +2,7 @@ package com.mym.max.ui.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.WindowManager;
 import android.widget.ImageView;
 
 import com.jaeger.library.StatusBarUtil;
@@ -22,7 +23,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        StatusBarUtil.setTranslucentForImageView(this, 55, ivSplash);
     }
 
     @OnClick(R.id.iv_splash)
