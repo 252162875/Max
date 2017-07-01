@@ -5,6 +5,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
+import android.view.View;
 import android.widget.FrameLayout;
 
 import com.jaeger.library.StatusBarUtil;
@@ -15,6 +17,7 @@ import com.mym.max.ui.fragment.MineFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import me.majiajie.pagerbottomtabstrip.NavigationController;
 import me.majiajie.pagerbottomtabstrip.PageBottomTabLayout;
 import me.majiajie.pagerbottomtabstrip.listener.OnTabItemSelectedListener;
@@ -96,5 +99,20 @@ public class HomeActivity extends BaseDataBindingActivity {
     @Override
     public void getData() {
 
+    }
+
+    @OnClick({R.id.iv_avatar, R.id.toolbar})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.iv_avatar:
+                if (!drawerlayout.isDrawerOpen(Gravity.LEFT)) {
+                    drawerlayout.openDrawer(Gravity.LEFT, true);
+                } else {
+                    drawerlayout.closeDrawer(Gravity.LEFT, true);
+                }
+                break;
+            case R.id.toolbar:
+                break;
+        }
     }
 }
