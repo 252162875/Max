@@ -33,7 +33,6 @@ public class ParamsInterceptor implements Interceptor {
             }
             if (null != newBody) {
                 Request newRequest = orgRequest.newBuilder()
-                        .addHeader("cookie", "JSESSIONID=" + PrefUtils.getString(Constants.SESSIONID, ""))
                         .url(orgRequest.url())
                         .method(orgRequest.method(), newBody)
                         .build();
@@ -49,14 +48,6 @@ public class ParamsInterceptor implements Interceptor {
 
                 Response response = chain.proceed(newRequest);
 
-                //存入Session
-                if (response.header("Set-Cookie") != null) {
-                    String sessionId = response.header("sessionId");
-                    if (sessionId != null && !sessionId.isEmpty()) {
-                        PrefUtils.putString(Constants.SESSIONID, sessionId);
-                    }
-//                        SessionManager.setSession(response.header("Set-Cookie"));
-                }
                 long t2 = System.nanoTime();
                 //打印回调
                 String s = String.format("Received Response for %s in %.1fms%n%s",
@@ -84,10 +75,6 @@ public class ParamsInterceptor implements Interceptor {
     private MultipartBody addParamsToMultipartBody(MultipartBody body) {
         MultipartBody.Builder builder = new MultipartBody.Builder();
         builder.setType(MultipartBody.FORM);
-        String userToke = PrefUtils.getString(Constants.USERTOKE, "").equals("[]") ? "" : PrefUtils.getString(Constants.USERTOKE, "");
-        //添加
-        builder.addFormDataPart("platform", "1");
-        builder.addFormDataPart("userToke", userToke);
         //添加原请求体
         for (int i = 0; i < body.size(); i++) {
             builder.addPart(body.part(i));
@@ -104,11 +91,6 @@ public class ParamsInterceptor implements Interceptor {
      */
     private FormBody addParamsToFormBody(FormBody body) {
         FormBody.Builder builder = new FormBody.Builder();
-        String userToke = PrefUtils.getString(Constants.USERTOKE, "").equals("[]") ? "" : PrefUtils.getString(Constants.USERTOKE, "");
-        //添加
-        builder.add("platform", "1");
-        builder.add("userToke", userToke);
-
         //添加原请求体
         for (int i = 0; i < body.size(); i++) {
             builder.addEncoded(body.encodedName(i), body.encodedValue(i));

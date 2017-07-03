@@ -115,7 +115,7 @@
                     android:layout_height="10dp"
                     android:layout_marginLeft="4dp"
                     android:layout_marginRight="33dp"
-                    android:src="@drawable/defalut_user_avartar" />
+                    android:src="@drawable/max_coin" />
             </LinearLayout>
 
             <LinearLayout
