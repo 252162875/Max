@@ -7,10 +7,7 @@ import java.util.Map;
 
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
-import retrofit2.http.Multipart;
 import retrofit2.http.POST;
-import retrofit2.http.Part;
-import retrofit2.http.PartMap;
 import rx.Observable;
 
 /**
@@ -24,6 +21,18 @@ public interface HttpClient {
         public static HttpClient getService() {
             return HttpUtils.getInstance().getServer(HttpClient.class);
         }
+
+        public static HttpClient getDouBanService() {
+            return HttpUtils.getInstance().getDouBanServer(HttpClient.class);
+        }
+
+        public static HttpClient getTingServer() {
+            return HttpUtils.getInstance().getTingServer(HttpClient.class);
+        }
+
+        public static HttpClient getGankIOServer() {
+            return HttpUtils.getInstance().getGankIOServer(HttpClient.class);
+        }
     }
 
 
@@ -33,12 +42,5 @@ public interface HttpClient {
     @FormUrlEncoded
     @POST(home)
     Observable<HomeBean> getHomeData(@FieldMap Map<String, String> params);
-//
-//    /**
-//     * 上传头像
-//     */
-//    @Multipart
-//    @POST(uploadAvatar)
-//    Observable<String> uploadAvatar(@Part("str") String str, @PartMap Map imgs);
 
 }
