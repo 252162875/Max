@@ -12,13 +12,17 @@ import rx.Subscription;
 import rx.subscriptions.CompositeSubscription;
 
 public class BaseModel {
-    public HttpClient service;
+    public HttpClient douBanService;
+    public HttpClient gankIOServer;
+    public HttpClient tingServer;
     public Subscriber subscriber;
     public HttpResultInterface httpResultIml;
     private CompositeSubscription mCompositeSubscription;
 
     public BaseModel() {
-        service = HttpClient.Builder.getService();
+        douBanService = HttpClient.Builder.getDouBanService();
+        gankIOServer = HttpClient.Builder.getGankIOServer();
+        tingServer = HttpClient.Builder.getTingServer();
     }
 
     public void setHttpResCallBack(final HttpResultInterface httpResultIml) {

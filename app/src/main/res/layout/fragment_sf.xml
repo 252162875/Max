@@ -6,7 +6,7 @@
 
         <variable
             name="mfvm"
-            type="com.mym.max.viewmodel.MineFragmentViewModel" />
+            type="com.mym.max.viewmodel.SfFragmentViewModel" />
     </data>
 
     <com.mym.max.ui.view.MultiStateView
@@ -16,13 +16,12 @@
         android:orientation="vertical"
         app:status="@{mfvm.pageStatus}">
 
-        <TextView
+        <android.support.v7.widget.RecyclerView
+            app:adapter="@{mfvm.adapter}"
+            app:data="@{mfvm.data}"
+            app:layoutManager="@{mfvm.linearLayoutManager}"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:onClick="@{mfvm.nextPage}"
-            android:textColor="@color/colorAccent"
-            android:text="点击进入个人资料" />
+            android:layout_height="match_parent" />
 
     </com.mym.max.ui.view.MultiStateView>
 </layout>

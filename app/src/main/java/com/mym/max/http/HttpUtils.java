@@ -39,12 +39,9 @@ public class HttpUtils {
     private Object gankHttps;
     private Object doubanHttps;
     private Object dongtingHttps;
-    private Object https;
-    //    private final static String API = "http://test.h-law.cn/ypcashier/";
-    private final static String API = "http://192.168.0.114:8080/";
     // gankio、豆瓣、（轮播图）
     private final static String API_GANKIO = "https://gank.io/api/";
-    private final static String API_DOUBAN = "Https://api.douban.com/";
+    private final static String API_DOUBAN = "https://api.douban.com/";
     private final static String API_TING = "https://tingapi.ting.baidu.com/v1/restserver/";
 
     public static HttpUtils getInstance() {
@@ -92,17 +89,6 @@ public class HttpUtils {
             }
         }
         return (T) dongtingHttps;
-    }
-
-    public <T> T getServer(Class<T> a) {
-        if (https == null) {
-            synchronized (HttpUtils.class) {
-                if (https == null) {
-                    https = getBuilder(API).build().create(a);
-                }
-            }
-        }
-        return (T) https;
     }
 
     private Retrofit.Builder getBuilder(String apiUrl) {

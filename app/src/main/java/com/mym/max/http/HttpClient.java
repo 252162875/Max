@@ -1,27 +1,26 @@
 package com.mym.max.http;
 
 
+import com.mym.max.bean.GankIoBean;
 import com.mym.max.bean.HomeBean;
 
 import java.util.Map;
 
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 import rx.Observable;
 
 /**
  *
  */
 public interface HttpClient {
-    String home = "adeasylife/wxMall/ajaxIndex";
-    String uploadAvatar = "VolleyTest//servlet/DeviceIDServlet";
+//    String home = "adeasylife/wxMall/ajaxIndex";
+//    String uploadAvatar = "VolleyTest//servlet/DeviceIDServlet";
 
     class Builder {
-        public static HttpClient getService() {
-            return HttpUtils.getInstance().getServer(HttpClient.class);
-        }
-
         public static HttpClient getDouBanService() {
             return HttpUtils.getInstance().getDouBanServer(HttpClient.class);
         }
@@ -37,10 +36,13 @@ public interface HttpClient {
 
 
     /**
-     * 获取验证码
+     * 分类数据: http://gank.io/api/data/数据类型/请求个数/第几页
+     * 数据类型： 福利 | Android | iOS | 休息视频 | 拓展资源 | 前端 | all
+     * 请求个数： 数字，大于0
+     * 第几页：数字，大于0
+     * eg: http://gank.io/api/data/Android/10/1
      */
-    @FormUrlEncoded
-    @POST(home)
-    Observable<HomeBean> getHomeData(@FieldMap Map<String, String> params);
+    @GET("data/{type}/{pre_page}/{page}")
+    Observable<GankIoBean> getGankIoData(@Path("type") String id, @Path("page") int page, @Path("pre_page") int pre_page);
 
 }

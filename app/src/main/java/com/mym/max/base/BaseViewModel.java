@@ -5,7 +5,7 @@ import android.databinding.BaseObservable;
 import android.databinding.Bindable;
 import android.os.Bundle;
 import android.view.View;
-
+import android.widget.Toast;
 
 import com.mym.max.http.HttpResultInterface;
 import com.mym.max.utils.UiUtils;
@@ -19,7 +19,7 @@ public abstract class BaseViewModel extends BaseObservable implements HttpResult
     public Context context;
     public Bundle bundle;
     public BaseFragment baseFragment;
-//    public final ProgressDialog pd;
+    //    public final ProgressDialog pd;
     HashMap<String, String> requestHashMap = new HashMap<>();
 
     public BaseViewModel(Context context, BaseModel baseModel) {
@@ -76,10 +76,10 @@ public abstract class BaseViewModel extends BaseObservable implements HttpResult
 
     @Override
     public void onRequestSuccess(BaseBean data) {
-        if (data.getStatus() == 200 && data != null) {
+        if (!data.isError()) {
             successData(data);
         } else {
-            UiUtils.showToast(data.getMessage());
+            Toast.makeText(context, "data error", Toast.LENGTH_SHORT).show();
         }
     }
 

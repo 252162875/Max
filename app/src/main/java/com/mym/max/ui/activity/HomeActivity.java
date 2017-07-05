@@ -13,7 +13,7 @@ import com.jaeger.library.StatusBarUtil;
 import com.mym.max.R;
 import com.mym.max.base.BaseDataBindingActivity;
 import com.mym.max.ui.fragment.FragmentMap;
-import com.mym.max.ui.fragment.MineFragment;
+import com.mym.max.ui.fragment.SfFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -75,19 +75,19 @@ public class HomeActivity extends BaseDataBindingActivity {
         if (fragment == null) {
             switch (index) {
                 case 0:
-                    fragment = new MineFragment();
+                    fragment = new SfFragment();
                     break;
                 case 1:
-                    fragment = new MineFragment();
+                    fragment = new SfFragment();
                     break;
                 case 2:
-                    fragment = new MineFragment();
+                    fragment = new SfFragment();
                     break;
                 case 3:
-                    fragment = new MineFragment();
+                    fragment = new SfFragment();
                     break;
                 case 4:
-                    fragment = new MineFragment();
+                    fragment = new SfFragment();
                     break;
             }
             fragmentMap.addFragment(index, fragment);
