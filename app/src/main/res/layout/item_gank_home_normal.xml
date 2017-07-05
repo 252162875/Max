@@ -72,11 +72,11 @@
 
                     <TextView
                         android:id="@+id/tv_from"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:maxLines="1"
-                        android:text="@{rb.type+` · `+rb.who == null?`无名`:rb.who}" />
+                        android:text="@{rb.type+` · `+(rb.who ?? `无名`)}" />
 
                     <TextView
                         android:id="@+id/tv_time"
