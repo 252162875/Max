@@ -14,11 +14,15 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.mym.max.app.BaseApplication;
 
 import java.util.ArrayList;
+
+import static com.bumptech.glide.load.resource.bitmap.BitmapTransitionOptions.withCrossFade;
 
 
 /**
@@ -259,5 +263,14 @@ public class UiUtils {
             mContentChild.setLayoutParams(lp);
             mContentChild.setTag(null);
         }
+    }
+
+    /**
+     * 设置图片到imageview
+     * @param view
+     * @param url
+     */
+    public static void setImage(ImageView view, String url) {
+        Glide.with(view.getContext()).asBitmap().load(url).apply(BaseApplication.getRequestOptions()).transition(withCrossFade(500)).into(view);
     }
 }
