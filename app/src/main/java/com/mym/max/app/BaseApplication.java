@@ -36,7 +36,7 @@ public class BaseApplication extends Application {
         mainThreadId = android.os.Process.myTid();
 //        // bugly异常处理
 //        CrashReport.initCrashReport(getApplicationContext(), "0e20923237", false);
-        requestOptions = RequestOptions.placeholderOf(R.drawable.ic_launcher).error(R.drawable.splash);
+        requestOptions = RequestOptions.placeholderOf(R.drawable.place).error(R.drawable.error);
     }
 
     public static RequestOptions getRequestOptions() {
