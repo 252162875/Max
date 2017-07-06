@@ -4,6 +4,8 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
 
+    <color name="colorHomeCard">#417894</color>
+
     <color name="appMainColor">#141E28</color>
     <color name="appAlpMainColor">#e7192129</color>
     <color name="normalText">#666666</color>

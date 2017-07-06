@@ -2,6 +2,7 @@ package com.mym.max.viewmodel;
 
 import android.databinding.Bindable;
 import android.databinding.BindingAdapter;
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -15,7 +16,9 @@ import com.mym.max.base.BaseModel;
 import com.mym.max.base.BaseViewModel;
 import com.mym.max.bean.GankIoBean;
 import com.mym.max.model.SfFragmentModel;
+import com.mym.max.ui.activity.WebActivity;
 import com.mym.max.ui.view.MultiStateView;
+import com.mym.max.utils.UiUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +40,19 @@ public class SfFragmentViewModel extends BaseViewModel {
     public void initEvent() {
         linearLayoutManager = new LinearLayoutManager(context, RecyclerView.VERTICAL, false);
         adapter = new FragmentSfAdapter(context, data);
+        adapter.setOnItemClickListener(new FragmentSfAdapter.OnItemClickLisenter() {
+            @Override
+            public void onItemClicked(View v, int pos) {
+//                Toast.makeText(context, "GOTO :" + data.get(pos).getUrl(), Toast.LENGTH_SHORT).show();
+                String url = data.get(pos).getUrl();
+                if (url == null || url.isEmpty() || url.equals("")) {
+                    return;
+                }
+                Bundle bundle = new Bundle();
+                bundle.putString("url", url);
+                UiUtils.startActivityWithBundle(context, WebActivity.class, bundle);
+            }
+        });
         notifyPropertyChanged(BR.data);
     }
 

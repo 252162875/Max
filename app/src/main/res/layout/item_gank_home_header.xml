@@ -1,48 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:orientation="horizontal">-->
 
-        <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp" />
+        <!--<ImageView-->
+            <!--android:layout_width="20dp"-->
+            <!--android:layout_height="20dp" />-->
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="我的账号" />
+        <!--<TextView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_weight="1"-->
+            <!--android:text="我的账号" />-->
 
-        <LinearLayout
-            android:layout_width="100dp"
-            android:layout_height="20dp"
-            android:layout_weight="0"
-            android:orientation="horizontal">
+        <!--<LinearLayout-->
+            <!--android:layout_width="100dp"-->
+            <!--android:layout_height="20dp"-->
+            <!--android:layout_weight="0"-->
+            <!--android:orientation="horizontal">-->
 
-        </LinearLayout>
-    </LinearLayout>
+        <!--</LinearLayout>-->
+    <!--</LinearLayout>-->
 
     <com.youth.banner.Banner
+        android:id="@+id/banner"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:background="@color/colorPrimaryDark" />
+        android:layout_height="200dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorAccent"
         android:orientation="horizontal">
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:background="@color/colorAccent"
             android:orientation="vertical">
 
             <ImageView
@@ -54,6 +55,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:background="@color/colorPrimaryDark"
             android:orientation="vertical">
 
             <ImageView
@@ -61,28 +63,51 @@
                 android:layout_height="80dp" />
         </LinearLayout>
     </LinearLayout>
-    <LinearLayout
+
+    <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_margin="3dp"
+        card_view:cardBackgroundColor="@color/colorHomeCard"
+        card_view:cardCornerRadius="15dp"
+        card_view:cardElevation="3dp"
+        card_view:contentPadding="8dp">
 
-        <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp" />
-
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="我的关注" />
+            android:layout_height="30dp"
+            android:orientation="horizontal">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="关注列表"
-            android:layout_weight="0">
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="0"
+                android:text="最新文章"
+                android:textColor="@android:color/white" />
+            <ImageView
+                android:layout_width="13dp"
+                android:layout_height="13dp"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/down_circle" />
 
-        </TextView>
-    </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:gravity="right"
+                android:layout_weight="1"
+                android:text="全部文章"
+                android:textColor="@android:color/white" />
+
+            <ImageView
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/right" />
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
 
 </LinearLayout>
