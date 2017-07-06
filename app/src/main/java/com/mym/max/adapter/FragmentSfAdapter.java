@@ -9,10 +9,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.bumptech.glide.Glide;
 import com.mym.max.R;
 import com.mym.max.bean.GankIoBean;
 import com.mym.max.databinding.ItemGankHomeNormalBinding;
+import com.mym.max.utils.UiUtils;
 
 import java.util.List;
 
@@ -49,31 +49,6 @@ public class FragmentSfAdapter extends RecyclerView.Adapter {
 
         } else if (holder instanceof ItemSecondViewHolder) {
             ((ItemSecondViewHolder) holder).bindData(data.get(position - 1));
-//            if (data.get(position - 1).getType().equals("福利")) {
-//                Glide.with(context).load(data.get(position - 1).getUrl()).into(((ItemSecondViewHolder) holder).ivBig);
-//                ((ItemSecondViewHolder) holder).ivBig.setVisibility(View.VISIBLE);
-//                ((ItemSecondViewHolder) holder).ll_des_small_img.setVisibility(View.GONE);
-//            } else {
-//                ((ItemSecondViewHolder) holder).ivBig.setVisibility(View.GONE);
-//                ((ItemSecondViewHolder) holder).ll_des_small_img.setVisibility(View.VISIBLE);
-//                String url = "";
-//                if (data != null) {
-//                    if (data.get(position - 1) != null) {
-//                        if (data.get(position - 1).getImages() != null) {
-//                            url = data.get(position - 1).getImages().get(0);
-//                        }
-//                    }
-//                }
-//                if (url.equals("")) {
-//                    ((ItemSecondViewHolder) holder).ivSmall.setVisibility(View.GONE);
-//                } else {
-//                    ((ItemSecondViewHolder) holder).ivSmall.setVisibility(View.VISIBLE);
-//                    Glide.with(context).load(url).into(((ItemSecondViewHolder) holder).ivSmall);
-//                }
-//            }
-//            ((ItemSecondViewHolder) holder).tvDes.setText(data.get(position - 1).getDesc());
-//            ((ItemSecondViewHolder) holder).tvFrom.setText(data.get(position - 1).getType() + "·" + (data.get(position - 1).getWho() == null ? "佚名" : data.get(position - 1).getWho()));
-//            ((ItemSecondViewHolder) holder).tvTime.setText(data.get(position - 1).getCreatedAt());
         }
     }
 
@@ -107,23 +82,6 @@ public class FragmentSfAdapter extends RecyclerView.Adapter {
     }
 
     public static class ItemSecondViewHolder extends RecyclerView.ViewHolder {
-//        @BindView(R.id.tv_des)
-//        TextView tvDes;
-//        @BindView(R.id.tv_from)
-//        TextView tvFrom;
-//        @BindView(R.id.tv_time)
-//        TextView tvTime;
-//        @BindView(R.id.iv_big)
-//        ImageView ivBig;
-//        @BindView(R.id.iv_small)
-//        ImageView ivSmall;
-//        @BindView(R.id.ll_des_small_img)
-//        LinearLayout ll_des_small_img;
-//
-//        public ItemSecondViewHolder(View itemView) {
-//            super(itemView);
-//            ButterKnife.bind(this, itemView);
-//        }
 
         public ItemSecondViewHolder(View root, ViewDataBinding binding) {
             super(root);
@@ -146,20 +104,11 @@ public class FragmentSfAdapter extends RecyclerView.Adapter {
         void onItemClicked(View v, int pos);
     }
 
-//    @BindingAdapter({"visibility"})
-//    public static void data(View view, String type) {
-//        if (type.equals("福利")) {
-//            view.setVisibility(View.VISIBLE);
-//        } else {
-//            view.setVisibility(View.GONE);
-//        }
-//    }
-
     @BindingAdapter({"type", "url"})
     public static void loadBigImage(ImageView view, String type, String url) {
         if (type.equals("福利")) {
             view.setVisibility(View.VISIBLE);
-            Glide.with(view.getContext()).load(url).into(view);
+            UiUtils.setImage(view, url);
         } else {
             view.setVisibility(View.GONE);
         }
@@ -175,7 +124,7 @@ public class FragmentSfAdapter extends RecyclerView.Adapter {
             view.setVisibility(View.GONE);
         } else {
             view.setVisibility(View.VISIBLE);
-            Glide.with(view.getContext()).load(url).into(view);
+            UiUtils.setImage(view, url);
         }
     }
 }

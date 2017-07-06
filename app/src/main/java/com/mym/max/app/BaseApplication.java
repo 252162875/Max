@@ -4,6 +4,9 @@ import android.app.Application;
 import android.content.Context;
 import android.os.Handler;
 
+import com.bumptech.glide.request.RequestOptions;
+import com.mym.max.R;
+
 //import com.baidu.mapapi.SDKInitializer;
 //import com.tencent.bugly.crashreport.CrashReport;
 
@@ -17,6 +20,7 @@ public class BaseApplication extends Application {
     private static Context context;
     private static Handler handler;
     private static int mainThreadId;
+    private static RequestOptions requestOptions;
 
     @Override
     public void onCreate() {
@@ -32,8 +36,15 @@ public class BaseApplication extends Application {
         mainThreadId = android.os.Process.myTid();
 //        // bugly异常处理
 //        CrashReport.initCrashReport(getApplicationContext(), "0e20923237", false);
+        requestOptions = RequestOptions.placeholderOf(R.drawable.ic_launcher).error(R.drawable.splash).centerInside();
+    }
+    public static RequestOptions getRequestOptions() {
+        return requestOptions;
     }
 
+    public static void setRequestOptions(RequestOptions requestOptions) {
+        BaseApplication.requestOptions = requestOptions;
+    }
     public static Context getContext() {
         return context;
     }
