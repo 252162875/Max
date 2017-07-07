@@ -20,6 +20,7 @@
             app:adapter="@{mfvm.adapter}"
             app:data="@{mfvm.data}"
             app:layoutManager="@{mfvm.linearLayoutManager}"
+            android:background="@color/colorWhite"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
