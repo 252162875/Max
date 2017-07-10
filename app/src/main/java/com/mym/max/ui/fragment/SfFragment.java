@@ -13,7 +13,7 @@ import com.mym.max.viewmodel.SfFragmentViewModel;
 
 
 public class SfFragment extends BaseFragment {
-    private FragmentSfBinding mBinding;
+    public FragmentSfBinding mBinding;
 
     @Override
     public MultiStateView initView(LayoutInflater inflater, ViewGroup container) {
@@ -30,6 +30,6 @@ public class SfFragment extends BaseFragment {
 
     @Override
     public void getData() {
-        ((SfFragmentViewModel) myViewModel).getGankIoData("all", 1, 50);
+        ((SfFragmentViewModel) myViewModel).getGankIoData("all", 1, 30);
     }
 }

@@ -9,8 +9,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 
 
+import com.bumptech.glide.Glide;
 import com.mym.max.R;
 import com.mym.max.ui.view.MultiStateView;
 
@@ -41,6 +43,8 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
         empty_view.setOnClickListener(this);
         retry.setOnClickListener(this);
         View loading_view = mInflater.inflate(R.layout.loading_view, state_view, false);
+        ImageView iv_loading = (ImageView) loading_view.findViewById(R.id.iv_loading);
+        Glide.with(getContext()).load(R.drawable.nvhai).into(iv_loading);
         state_view.setViewForState(empty_view, MultiStateView.VIEW_STATE_EMPTY);
         state_view.setViewForState(error_view, MultiStateView.VIEW_STATE_ERROR);
         state_view.setViewForState(loading_view, MultiStateView.VIEW_STATE_LOADING);

@@ -8,6 +8,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Toast;
 
+import com.aspsine.swipetoloadlayout.OnLoadMoreListener;
+import com.aspsine.swipetoloadlayout.OnRefreshListener;
+import com.aspsine.swipetoloadlayout.SwipeToLoadLayout;
 import com.mym.max.BR;
 import com.mym.max.adapter.FragmentSfAdapter;
 import com.mym.max.base.BaseBean;
@@ -24,11 +27,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class SfFragmentViewModel extends BaseViewModel {
+public class SfFragmentViewModel extends BaseViewModel implements OnRefreshListener, OnLoadMoreListener {
     @Bindable
     public int pageStatus = MultiStateView.VIEW_STATE_LOADING;
     public LinearLayoutManager linearLayoutManager;
     public FragmentSfAdapter adapter;
+    public OnRefreshListener refreshListener = this;
+    public OnLoadMoreListener loadMoreListener = this;
+    @Bindable
+    public boolean refreshState = false;
+    @Bindable
+    public boolean loadMoreState = false;
     @Bindable
     public ArrayList<GankIoBean.ResultsBean> data = new ArrayList<>();
 
@@ -70,12 +79,20 @@ public class SfFragmentViewModel extends BaseViewModel {
         super.onRequestError(e);
         pageStatus = MultiStateView.VIEW_STATE_ERROR;
         notifyPropertyChanged(BR.pageStatus);
+        refreshState = false;
+        notifyPropertyChanged(BR.refreshState);
+        loadMoreState = false;
+        notifyPropertyChanged(BR.loadMoreState);
     }
 
 
     @Override
     public void successData(BaseBean data) {
         if (data instanceof GankIoBean) {
+            refreshState = false;
+            notifyPropertyChanged(BR.refreshState);
+            loadMoreState = false;
+            notifyPropertyChanged(BR.loadMoreState);
             Toast.makeText(context, "GankIoBean数据拿到了", Toast.LENGTH_SHORT).show();
             pageStatus = MultiStateView.VIEW_STATE_CONTENT;
             notifyPropertyChanged(BR.pageStatus);
@@ -102,5 +119,41 @@ public class SfFragmentViewModel extends BaseViewModel {
     @BindingAdapter({"data"})
     public static void data(RecyclerView recyclerView, List data) {
         recyclerView.getAdapter().notifyDataSetChanged();
+    }
+
+    @BindingAdapter({"setRefresh"})
+    public static void setRefresh(SwipeToLoadLayout swipeToLoadLayout, OnRefreshListener listener) {
+        swipeToLoadLayout.setOnRefreshListener(listener);
+    }
+
+    @BindingAdapter({"setLoadMore"})
+    public static void setLoadMore(SwipeToLoadLayout swipeToLoadLayout, OnLoadMoreListener listener) {
+        swipeToLoadLayout.setOnLoadMoreListener(listener);
+    }
+
+    @BindingAdapter({"refreshState"})
+    public static void refreshState(SwipeToLoadLayout swipeToLoadLayout, boolean refreshState) {
+        swipeToLoadLayout.setRefreshing(refreshState);
+    }
+
+    @BindingAdapter({"loadMoreState"})
+    public static void loadMoreState(SwipeToLoadLayout swipeToLoadLayout, boolean loadMoreState) {
+        swipeToLoadLayout.setLoadingMore(loadMoreState);
+    }
+
+    @Override
+    public void onRefresh() {
+        Toast.makeText(context, "REFRESH", Toast.LENGTH_SHORT).show();
+        refreshState = true;
+        notifyPropertyChanged(BR.refreshState);
+        getGankIoData("all", 1, 30);
+    }
+
+    @Override
+    public void onLoadMore() {
+        Toast.makeText(context, "LOADMORE", Toast.LENGTH_SHORT).show();
+        loadMoreState = true;
+        notifyPropertyChanged(BR.loadMoreState);
+        getGankIoData("all", 1, 30);
     }
 }

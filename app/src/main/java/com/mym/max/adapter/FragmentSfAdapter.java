@@ -9,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.mym.max.R;
 import com.mym.max.bean.GankIoBean;
@@ -56,6 +58,7 @@ public class FragmentSfAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
         if (holder instanceof ItemFirstViewHolder) {
             final ArrayList<String> images = new ArrayList<String>();
+            final ArrayList<String> titles = new ArrayList<String>();
             images.add("http://i1.img.969g.com/pub/imgx2015/01/09/326_161451_9bc72_lit.png");
             images.add("http://i1.img.969g.com/pub/imgx2015/01/09/326_161418_283a6.png");
             images.add("http://i3.img.969g.com/pub/imgx2015/01/09/326_161430_a6b41_lit.png");
@@ -65,19 +68,30 @@ public class FragmentSfAdapter extends RecyclerView.Adapter {
             images.add("http://i2.img.969g.com/pub/imgx2015/01/09/326_161458_328b8_lit.png");
             images.add("http://i1.img.969g.com/pub/imgx2015/01/09/326_161522_3f3c6_lit.png");
             images.add("http://i1.img.969g.com/pub/imgx2015/01/09/326_161542_9d4bf_lit.png");
+            titles.add("title-1");
+            titles.add("title-2");
+            titles.add("title-3");
+            titles.add("title-4");
+            titles.add("title-5");
+            titles.add("title-6");
+            titles.add("title-7");
+            titles.add("title-8");
+            titles.add("title-9");
 //            images.add("aaaaa");
             //设置banner样式
-            ((ItemFirstViewHolder) holder).banner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR);
+            ((ItemFirstViewHolder) holder).banner.setBannerStyle(BannerConfig.NUM_INDICATOR_TITLE);
             //设置图片加载器
             ((ItemFirstViewHolder) holder).banner.setImageLoader(new GlideImageLoader());
             //设置图片集合
             ((ItemFirstViewHolder) holder).banner.setImages(images);
+            //设置标题集合
+            ((ItemFirstViewHolder) holder).banner.setBannerTitles(titles);
             //设置banner动画效果
 //            ((ItemFirstViewHolder) holder).banner.setBannerAnimation(Transformer.Default);
-//            ((ItemFirstViewHolder) holder).banner.setBannerAnimation(Transformer.Accordion);
+            ((ItemFirstViewHolder) holder).banner.setBannerAnimation(Transformer.Accordion);//这个在7.0没问题
 //            ((ItemFirstViewHolder) holder).banner.setBannerAnimation(Transformer.BackgroundToForeground);
 //            ((ItemFirstViewHolder) holder).banner.setBannerAnimation(Transformer.ForegroundToBackground);
-            ((ItemFirstViewHolder) holder).banner.setBannerAnimation(Transformer.CubeIn);
+//            ((ItemFirstViewHolder) holder).banner.setBannerAnimation(Transformer.CubeIn);//这个不错,但是在7.0上没效果
 //            ((ItemFirstViewHolder) holder).banner.setBannerAnimation(Transformer.CubeOut);
 //            ((ItemFirstViewHolder) holder).banner.setBannerAnimation(Transformer.DepthPage);
 //            ((ItemFirstViewHolder) holder).banner.setBannerAnimation(Transformer.FlipHorizontal);
@@ -103,6 +117,12 @@ public class FragmentSfAdapter extends RecyclerView.Adapter {
                     Bundle bundle = new Bundle();
                     bundle.putString("url", images.get(position));
                     UiUtils.startActivityWithBundle(context, WebActivity.class, bundle);
+                }
+            });
+            ((ItemFirstViewHolder) holder).tvAll.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(context, "打开新的activity，展示分类", Toast.LENGTH_SHORT).show();
                 }
             });
 
@@ -143,6 +163,10 @@ public class FragmentSfAdapter extends RecyclerView.Adapter {
     public class ItemFirstViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.banner)
         Banner banner;
+        @BindView(R.id.iv_all)
+        ImageView ivAll;
+        @BindView(R.id.tv_all)
+        TextView tvAll;
 
         public ItemFirstViewHolder(View itemView) {
             super(itemView);
