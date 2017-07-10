@@ -16,13 +16,36 @@
         android:orientation="vertical"
         app:status="@{mfvm.pageStatus}">
 
-        <android.support.v7.widget.RecyclerView
-            app:adapter="@{mfvm.adapter}"
-            app:data="@{mfvm.data}"
-            app:layoutManager="@{mfvm.linearLayoutManager}"
-            android:background="@color/colorWhite"
+        <com.aspsine.swipetoloadlayout.SwipeToLoadLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            app:loadMoreState="@{mfvm.loadMoreState}"
+            app:refreshState="@{mfvm.refreshState}"
+            app:setLoadMore="@{mfvm.loadMoreListener}"
+            app:setRefresh="@{mfvm.refreshListener}">
+
+            <com.mym.max.ui.view.RefreshHeaderView
+                android:id="@id/swipe_refresh_header"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:gravity="center" />
+
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@id/swipe_target"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorWhite"
+                app:adapter="@{mfvm.adapter}"
+                app:data="@{mfvm.data}"
+                app:layoutManager="@{mfvm.linearLayoutManager}" />
+
+            <com.mym.max.ui.view.LoadMoreFooterView
+                android:id="@id/swipe_load_more_footer"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="center" />
+        </com.aspsine.swipetoloadlayout.SwipeToLoadLayout>
 
     </com.mym.max.ui.view.MultiStateView>
 </layout>
