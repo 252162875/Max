@@ -27,19 +27,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class SfFragmentViewModel extends BaseViewModel implements OnRefreshListener, OnLoadMoreListener {
+public class SfFragmentViewModel extends BaseViewModel implements OnRefreshListener {
     @Bindable
     public int pageStatus = MultiStateView.VIEW_STATE_LOADING;
     public LinearLayoutManager linearLayoutManager;
     public FragmentSfAdapter adapter;
     public OnRefreshListener refreshListener = this;
-    public OnLoadMoreListener loadMoreListener = this;
     @Bindable
     public boolean refreshState = false;
     @Bindable
-    public boolean loadMoreState = false;
-    @Bindable
     public ArrayList<GankIoBean.ResultsBean> data = new ArrayList<>();
+    public boolean isrefresh = false;
 
     public SfFragmentViewModel(BaseFragment baseFragment, BaseModel baseModel) {
         super(baseFragment, baseModel);
@@ -77,12 +75,12 @@ public class SfFragmentViewModel extends BaseViewModel implements OnRefreshListe
     @Override
     public void onRequestError(Throwable e) {
         super.onRequestError(e);
-        pageStatus = MultiStateView.VIEW_STATE_ERROR;
-        notifyPropertyChanged(BR.pageStatus);
+        if (!isrefresh) {
+            pageStatus = MultiStateView.VIEW_STATE_ERROR;
+            notifyPropertyChanged(BR.pageStatus);
+        }
         refreshState = false;
         notifyPropertyChanged(BR.refreshState);
-        loadMoreState = false;
-        notifyPropertyChanged(BR.loadMoreState);
     }
 
 
@@ -91,8 +89,6 @@ public class SfFragmentViewModel extends BaseViewModel implements OnRefreshListe
         if (data instanceof GankIoBean) {
             refreshState = false;
             notifyPropertyChanged(BR.refreshState);
-            loadMoreState = false;
-            notifyPropertyChanged(BR.loadMoreState);
             Toast.makeText(context, "GankIoBean数据拿到了", Toast.LENGTH_SHORT).show();
             pageStatus = MultiStateView.VIEW_STATE_CONTENT;
             notifyPropertyChanged(BR.pageStatus);
@@ -143,17 +139,10 @@ public class SfFragmentViewModel extends BaseViewModel implements OnRefreshListe
 
     @Override
     public void onRefresh() {
+        isrefresh = true;
         Toast.makeText(context, "REFRESH", Toast.LENGTH_SHORT).show();
         refreshState = true;
         notifyPropertyChanged(BR.refreshState);
-        getGankIoData("all", 1, 30);
-    }
-
-    @Override
-    public void onLoadMore() {
-        Toast.makeText(context, "LOADMORE", Toast.LENGTH_SHORT).show();
-        loadMoreState = true;
-        notifyPropertyChanged(BR.loadMoreState);
         getGankIoData("all", 1, 30);
     }
 }
