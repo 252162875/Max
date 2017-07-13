@@ -39,4 +39,14 @@
         <attr name="msv_animateViewChanges" format="boolean" />
     </declare-styleable>
 
+
+    <style name="HooliganActivityStyle" parent="Theme.AppCompat">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowNoDisplay">false</item>
+        <item name="android:windowDisablePreview">true</item>
+    </style>
+
+
 </resources>

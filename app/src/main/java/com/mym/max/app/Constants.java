@@ -1,38 +1,48 @@
 package com.mym.max.app;
 
+import com.mym.max.ui.activity.LiveActivity;
+
 /**
- * 固定参数
+ *
  */
 
 public class Constants {
+    private LiveActivity liveActivity = null;
 
-    /**
-     * 退出要删除的
-     */
-    public static String SESSIONID = "SESSIONID";
+    private static class Builder {
+        private static Constants instance = new Constants();
+    }
 
-    public static String USERTOKE = "USERTOKE";
+    public static Constants getConstants() {
+        return Builder.instance;
+    }
 
-//    //权限链
-//    public static String MODILELINK = "MODILELINK";
-//    //权限密码
-//    public static String ROLEPASSWORDHASH = "ROLEPASSWORDHASH";
-//    // 本账号菜品的分类集合
-//    public static String TYPELIST = "TYPELIST";
-//    // 本账号菜品口味的分类
-//    public static String DISHERS = "DISHERS";
-//    // 本账号菜品规格的分类
-//    public static String SPES = "SPES";
-    /**
-     * 退出要删除的
-     */
-//    public static String[] DELETE = {SESSIONID, USERTOKE, TYPELIST, DISHERS, SPES, MODILELINK, ROLEPASSWORDHASH};
-    /** ----------------------------------------------------------------华丽的分割线------------------------------------------------------------------------------------*/
+    public LiveActivity getLiveActivity() {
+        return liveActivity;
+    }
+
+    public void setLiveActivity(LiveActivity liveActivity) {
+        this.liveActivity = liveActivity;
+    }
 
 
-    /**
-     * 退出时不用删除的
-     */
-
-    /** ----------------------------------------------------------------华丽的分割线------------------------------------------------------------------------------------*/
+//    public Constants getInstance() {
+//        if (instance == null) {
+//            instance = new Constants();
+//        }
+//        return instance;
+//    }
+//
+//
+//    public class Singleton {
+//        private static class Holder {
+//            private static Singleton singleton = new Singleton();
+//        }
+//
+//        private Singleton(){}
+//
+//        public static Singleton getSingleton(){
+//            return Holder.singleton;
+//        }
+//    }
 }

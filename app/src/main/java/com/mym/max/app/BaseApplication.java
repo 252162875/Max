@@ -2,10 +2,14 @@ package com.mym.max.app;
 
 import android.app.Application;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Handler;
 
 import com.bumptech.glide.request.RequestOptions;
 import com.mym.max.R;
+import com.mym.max.utils.ScreenBroadcastReceiver;
+import com.mym.max.utils.UiUtils;
 
 //import com.baidu.mapapi.SDKInitializer;
 //import com.tencent.bugly.crashreport.CrashReport;
@@ -37,6 +41,12 @@ public class BaseApplication extends Application {
 //        // bugly异常处理
 //        CrashReport.initCrashReport(getApplicationContext(), "0e20923237", false);
         requestOptions = RequestOptions.placeholderOf(R.drawable.place).error(R.drawable.error);
+
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(Intent.ACTION_SCREEN_ON);
+        filter.addAction(Intent.ACTION_SCREEN_OFF);
+        ScreenBroadcastReceiver screenBroadcastReceiver = new ScreenBroadcastReceiver();
+        UiUtils.getContext().registerReceiver(screenBroadcastReceiver, filter);
     }
 
     public static RequestOptions getRequestOptions() {
