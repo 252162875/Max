@@ -101,7 +101,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="3dp"
-        card_view:cardBackgroundColor="@color/colorHomeCard"
+        card_view:cardBackgroundColor="@color/colorAccent"
         card_view:cardCornerRadius="15dp"
         card_view:cardElevation="3dp"
         card_view:contentPadding="8dp">

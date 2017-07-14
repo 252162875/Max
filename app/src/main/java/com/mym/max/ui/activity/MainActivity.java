@@ -1,6 +1,7 @@
 package com.mym.max.ui.activity;
 
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -47,6 +48,7 @@ public class MainActivity extends BaseDataBindingActivity {
                     //主动点击跳过的标记
                     return;
                 }
+                tvTime.setText("跳转中...");
                 UiUtils.startActivity(MainActivity.this, HomeActivity.class);
                 MainActivity.this.finish();
             }
@@ -70,5 +72,13 @@ public class MainActivity extends BaseDataBindingActivity {
         closed = true;
         UiUtils.startActivity(this, HomeActivity.class);
         MainActivity.this.finish();
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK  && event.getAction() == KeyEvent.ACTION_DOWN) {
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

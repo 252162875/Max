@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 
-
 import com.bumptech.glide.Glide;
 import com.mym.max.R;
 import com.mym.max.ui.view.MultiStateView;
@@ -24,6 +23,7 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
     public BaseViewModel myViewModel;
     public boolean isInitView = false;
     private boolean isFirstLoad = true;
+    private boolean isVisible = false;
     public MultiStateView state_view;
     public LayoutInflater mInflater;
     public Button retry;
@@ -61,10 +61,21 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
         lazyLoad();
     }
 
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser) {
+            isVisible = true;
+            lazyLoad();
+        } else {
+            isVisible = false;
+        }
+    }
+
     public abstract void getData();
 
     private void lazyLoad() {
-        if (!isFirstLoad || !isInitView) {
+        if (!isFirstLoad || !isVisible || !isInitView) {
             return;
         }
         //加载数据

@@ -51,8 +51,10 @@ public class FragmentMap {
                 FragmentTransaction ft = manage.beginTransaction();
                 if (key == tempKey) {
                     ft.show(fragment);
+                    fragment.setUserVisibleHint(true);
                 } else {
                     ft.hide(fragment);
+                    fragment.setUserVisibleHint(false);
                 }
                 ft.commit();
             }

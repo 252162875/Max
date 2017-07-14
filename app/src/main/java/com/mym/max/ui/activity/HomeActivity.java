@@ -11,11 +11,11 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
-import com.jaeger.library.StatusBarUtil;
 import com.mym.max.R;
 import com.mym.max.base.BaseDataBindingActivity;
 import com.mym.max.ui.fragment.FragmentMap;
 import com.mym.max.ui.fragment.SfFragment;
+import com.mym.max.utils.StatusBarUtil;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -42,8 +42,7 @@ public class HomeActivity extends BaseDataBindingActivity {
         ButterKnife.bind(this);
         fragmentMap = new FragmentMap();
         setSupportActionBar(toolbar);
-        StatusBarUtil.setColor(this, getResources().getColor(R.color.appMainColor), 0);
-        StatusBarUtil.setColorForDrawerLayout(this, drawerlayout, getResources().getColor(R.color.appMainColor), 0);
+        StatusBarUtil.setColorForDrawerLayout(this, drawerlayout, getResources().getColor(R.color.appMainColor), 0);//content的容器必须是FramLayout否则statusbar底部会有一条深色线
         NavigationController controller = bottomTablayout.material()
                 .addItem(R.drawable.rb_me, R.drawable.rb_me_click, "影魔", getResources().getColor(R.color.appMainColor))
                 .addItem(R.drawable.rb_home, R.drawable.rb_home_click, "祈求着", getResources().getColor(R.color.appMainColor))
@@ -58,7 +57,6 @@ public class HomeActivity extends BaseDataBindingActivity {
 
             @Override
             public void onRepeat(int index) {
-
             }
         });
         //默认初始化第一页，但是不走回调，所以手动调用showFragment(0)加载第一页数据

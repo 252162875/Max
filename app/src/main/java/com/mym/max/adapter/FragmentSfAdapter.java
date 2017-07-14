@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.mym.max.R;
 import com.mym.max.bean.GankIoBean;
 import com.mym.max.databinding.ItemGankHomeNormalBinding;
+import com.mym.max.ui.activity.GankClassificationActivity;
 import com.mym.max.ui.activity.WebActivity;
 import com.mym.max.utils.GlideImageLoader;
 import com.mym.max.utils.UiUtils;
@@ -122,7 +123,8 @@ public class FragmentSfAdapter extends RecyclerView.Adapter {
             ((ItemFirstViewHolder) holder).tvAll.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(context, "打开新的activity，展示分类", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(context, "打开新的activity，展示分类", Toast.LENGTH_SHORT).show();
+                    UiUtils.startActivity(context, GankClassificationActivity.class);
                 }
             });
 

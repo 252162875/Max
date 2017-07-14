@@ -5,80 +5,85 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <android.support.design.widget.AppBarLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/appMainColor">
-
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginRight="15dp">
-
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/iv_avatar"
-                        android:layout_width="45dp"
-                        android:layout_height="45dp"
-                        android:layout_centerVertical="true"
-                        android:layout_gravity="center_vertical"
-                        android:src="@drawable/splash" />
-
-                    <ImageView
-                        android:layout_width="75dp"
-                        android:layout_height="25dp"
-                        android:layout_centerInParent="true"
-                        android:src="@drawable/top_logo" />
-
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:src="@drawable/search_home" />
-
-                </RelativeLayout>
-            </android.support.v7.widget.Toolbar>
-
-        </android.support.design.widget.AppBarLayout>
-
-        <FrameLayout
-            android:id="@+id/fl_content"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:background="@color/viewBg">
-
-        </FrameLayout>
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <View
+            <android.support.design.widget.AppBarLayout
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/viewBg" />
+                android:layout_height="wrap_content"
+                android:background="@color/appMainColor">
 
-            <me.majiajie.pagerbottomtabstrip.PageBottomTabLayout
-                android:id="@+id/pagebottomtablayout"
+                <android.support.v7.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="15dp">
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/iv_avatar"
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"
+                            android:layout_centerVertical="true"
+                            android:layout_gravity="center_vertical"
+                            android:src="@drawable/splash" />
+
+                        <ImageView
+                            android:layout_width="75dp"
+                            android:layout_height="25dp"
+                            android:layout_centerInParent="true"
+                            android:src="@drawable/top_logo" />
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/search_home" />
+
+                    </RelativeLayout>
+                </android.support.v7.widget.Toolbar>
+
+            </android.support.design.widget.AppBarLayout>
+
+            <FrameLayout
+                android:id="@+id/fl_content"
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:background="@color/homeBottomtabBg"
-                android:elevation="8dp" />
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@color/viewBg">
+
+            </FrameLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:orientation="vertical">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/viewBg" />
+
+                <me.majiajie.pagerbottomtabstrip.PageBottomTabLayout
+                    android:id="@+id/pagebottomtablayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:background="@color/homeBottomtabBg"
+                    android:elevation="8dp" />
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
+    </FrameLayout>
 
 
     <LinearLayout
