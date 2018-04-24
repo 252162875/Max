@@ -19,7 +19,9 @@
         <com.aspsine.swipetoloadlayout.SwipeToLoadLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            app:loadMoreState="@{mfvm.loadmoreState}"
             app:refreshState="@{mfvm.refreshState}"
+            app:setLoadMore="@{mfvm.loadMoreListener}"
             app:setRefresh="@{mfvm.refreshListener}">
 
             <com.mym.max.ui.view.RefreshHeaderView
@@ -37,6 +39,12 @@
                 app:adapter="@{mfvm.adapter}"
                 app:data="@{mfvm.data}"
                 app:layoutManager="@{mfvm.linearLayoutManager}" />
+
+            <com.mym.max.ui.view.LoadMoreFooterView
+                android:id="@+id/swipe_load_more_footer"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:gravity="center" />
 
         </com.aspsine.swipetoloadlayout.SwipeToLoadLayout>
 

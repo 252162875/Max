@@ -27,17 +27,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class SfFragmentViewModel extends BaseViewModel implements OnRefreshListener {
+public class SfFragmentViewModel extends BaseViewModel implements OnRefreshListener, OnLoadMoreListener {
     @Bindable
     public int pageStatus = MultiStateView.VIEW_STATE_LOADING;
     public LinearLayoutManager linearLayoutManager;
     public FragmentSfAdapter adapter;
     public OnRefreshListener refreshListener = this;
+    public OnLoadMoreListener loadMoreListener = this;
     @Bindable
-    public boolean refreshState = false;
+    public boolean refreshState = true;
+    @Bindable
+    public boolean loadmoreState = false;
     @Bindable
     public ArrayList<GankIoBean.ResultsBean> data = new ArrayList<>();
     public boolean isrefresh = false;
+    public boolean isloadmore = false;
+    public int pageNum = 1;
+    public int pageCount = 20;
 
     public SfFragmentViewModel(BaseFragment baseFragment, BaseModel baseModel) {
         super(baseFragment, baseModel);
@@ -50,7 +56,7 @@ public class SfFragmentViewModel extends BaseViewModel implements OnRefreshListe
         adapter.setOnItemClickListener(new FragmentSfAdapter.OnItemClickLisenter() {
             @Override
             public void onItemClicked(View v, int pos) {
-//                Toast.makeText(context, "GOTO :" + data.get(pos).getUrl(), Toast.LENGTH_SHORT).show();
+//              Toast.makeText(context, "GOTO :" + data.get(pos).getUrl(), Toast.LENGTH_SHORT).show();
                 String url = data.get(pos).getUrl();
                 if (url == null || url.isEmpty() || url.equals("")) {
                     return;
@@ -63,9 +69,6 @@ public class SfFragmentViewModel extends BaseViewModel implements OnRefreshListe
         notifyPropertyChanged(BR.data);
     }
 
-    public void refresh() {
-
-    }
 
     @Override
     public void setRequestData() {
@@ -87,16 +90,30 @@ public class SfFragmentViewModel extends BaseViewModel implements OnRefreshListe
     @Override
     public void successData(BaseBean data) {
         if (data instanceof GankIoBean) {
-            refreshState = false;
-            notifyPropertyChanged(BR.refreshState);
-            Toast.makeText(context, "GankIoBean数据拿到了", Toast.LENGTH_SHORT).show();
-            pageStatus = MultiStateView.VIEW_STATE_CONTENT;
-            notifyPropertyChanged(BR.pageStatus);
-            this.data.clear();
-            for (int i = 0; i < ((GankIoBean) data).getResults().size(); i++) {
-                this.data.add(((GankIoBean) data).getResults().get(i));
+            pageNum++;
+            if (refreshState) {
+                refreshState = false;
+                notifyPropertyChanged(BR.refreshState);
+                Toast.makeText(context, "GankIoBean数据拿到了", Toast.LENGTH_SHORT).show();
+                pageStatus = MultiStateView.VIEW_STATE_CONTENT;
+                notifyPropertyChanged(BR.pageStatus);
+                this.data.clear();
+                for (int i = 0; i < ((GankIoBean) data).getResults().size(); i++) {
+                    this.data.add(((GankIoBean) data).getResults().get(i));
+                }
+                notifyPropertyChanged(BR.data);
             }
-            notifyPropertyChanged(BR.data);
+            if (loadmoreState) {
+                loadmoreState = false;
+                notifyPropertyChanged(BR.loadmoreState);
+                Toast.makeText(context, "GankIoBean数据拿到了", Toast.LENGTH_SHORT).show();
+                pageStatus = MultiStateView.VIEW_STATE_CONTENT;
+                notifyPropertyChanged(BR.pageStatus);
+                for (int i = 0; i < ((GankIoBean) data).getResults().size(); i++) {
+                    this.data.add(((GankIoBean) data).getResults().get(i));
+                }
+                notifyPropertyChanged(BR.data);
+            }
         }
     }
 
@@ -139,10 +156,20 @@ public class SfFragmentViewModel extends BaseViewModel implements OnRefreshListe
 
     @Override
     public void onRefresh() {
+        pageNum = 1;
         isrefresh = true;
         Toast.makeText(context, "REFRESH", Toast.LENGTH_SHORT).show();
         refreshState = true;
         notifyPropertyChanged(BR.refreshState);
-        getGankIoData("all", 1, 30);
+        getGankIoData("all", pageNum, pageCount);
+    }
+
+    @Override
+    public void onLoadMore() {
+        isloadmore = true;
+        Toast.makeText(context, "LOADMORE", Toast.LENGTH_SHORT).show();
+        loadmoreState = true;
+        notifyPropertyChanged(BR.loadmoreState);
+        getGankIoData("all", pageNum, pageCount);
     }
 }

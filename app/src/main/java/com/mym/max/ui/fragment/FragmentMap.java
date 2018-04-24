@@ -1,5 +1,6 @@
 package com.mym.max.ui.fragment;
 
+import android.annotation.SuppressLint;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -14,11 +15,12 @@ import java.util.HashMap;
  */
 public class FragmentMap {
 
-    public final HashMap<Integer, Fragment> mSavedFragment;
+    private final HashMap<Integer, Fragment> mSavedFragment;
     private final ArrayList<Integer> keys;
 
+    @SuppressLint("UseSparseArrays")
     public FragmentMap() {
-        mSavedFragment = new HashMap<Integer, Fragment>();
+        mSavedFragment = new HashMap<>();
         keys = new ArrayList<>();
     }
 

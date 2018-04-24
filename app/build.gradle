@@ -30,11 +30,11 @@ dependencies {
     })
     compile project(path: ':pager-bottom-tab-strip')
     //最新版本
+    //    compile 'com.jaeger.statusbarutil:library:1.4.0'
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.1'
     compile 'com.android.support:design:25.3.1'
     compile 'com.jakewharton:butterknife:8.0.1'
-//    compile 'com.jaeger.statusbarutil:library:1.4.0'
     compile 'de.hdodenhof:circleimageview:2.1.0'
     compile 'com.google.code.gson:gson:2.8.0'
     compile 'com.squareup.retrofit2:retrofit:2.1.0'

@@ -30,6 +30,6 @@ public class SfFragment extends BaseFragment {
 
     @Override
     public void getData() {
-        ((SfFragmentViewModel) myViewModel).getGankIoData("all", 1, 30);
+        ((SfFragmentViewModel) myViewModel).getGankIoData("all", 1, 20);
     }
 }

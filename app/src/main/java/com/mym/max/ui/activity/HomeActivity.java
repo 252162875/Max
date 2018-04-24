@@ -1,5 +1,6 @@
 package com.mym.max.ui.activity;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -9,13 +10,17 @@ import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.mym.max.R;
+import com.mym.max.app.Constants;
+import com.mym.max.app.RequestCode;
 import com.mym.max.base.BaseDataBindingActivity;
 import com.mym.max.ui.fragment.FragmentMap;
 import com.mym.max.ui.fragment.SfFragment;
 import com.mym.max.utils.StatusBarUtil;
+import com.mym.max.utils.UiUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -34,6 +39,8 @@ public class HomeActivity extends BaseDataBindingActivity {
     Toolbar toolbar;
     @BindView(R.id.pagebottomtablayout)
     PageBottomTabLayout bottomTablayout;
+    @BindView(R.id.iv_avatar_drawer)
+    ImageView iv_avatar_drawer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,7 +108,7 @@ public class HomeActivity extends BaseDataBindingActivity {
 
     }
 
-    @OnClick({R.id.iv_avatar, R.id.toolbar})
+    @OnClick({R.id.iv_avatar, R.id.toolbar,R.id.iv_avatar_drawer})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_avatar:
@@ -112,6 +119,9 @@ public class HomeActivity extends BaseDataBindingActivity {
                 }
                 break;
             case R.id.toolbar:
+                break;
+            case R.id.iv_avatar_drawer:
+                UiUtils.startActivityForResult(HomeActivity.this,SetAvatarActivity.class, RequestCode.REQUEST_CODE_HOME_AVATAR);
                 break;
         }
     }
