@@ -40,10 +40,10 @@ public class SfFragmentViewModel extends BaseViewModel implements OnRefreshListe
     public boolean loadmoreState = false;
     @Bindable
     public ArrayList<GankIoBean.ResultsBean> data = new ArrayList<>();
-    public boolean isrefresh = false;
-    public boolean isloadmore = false;
-    public int pageNum = 1;
-    public int pageCount = 20;
+    private boolean isrefresh = false;
+    private boolean isloadmore = false;
+    private int pageNum = 1;
+    private int pageCount = 20;
 
     public SfFragmentViewModel(BaseFragment baseFragment, BaseModel baseModel) {
         super(baseFragment, baseModel);
