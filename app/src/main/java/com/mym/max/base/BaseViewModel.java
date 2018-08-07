@@ -84,5 +84,6 @@ public abstract class BaseViewModel extends BaseObservable implements HttpResult
     }
 
     public void successData(BaseBean data) {
+
     }
 }

@@ -1,8 +1,6 @@
 package com.mym.max.base;
 
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -15,19 +13,26 @@ import com.bumptech.glide.Glide;
 import com.mym.max.R;
 import com.mym.max.ui.view.MultiStateView;
 
-import java.util.Timer;
-import java.util.TimerTask;
-
 public abstract class BaseFragment extends Fragment implements View.OnClickListener {
     public BaseModel myModel;
     public BaseViewModel myViewModel;
     public boolean isInitView = false;
-    private boolean isFirstLoad = true;
-    private boolean isVisible = false;
     public MultiStateView state_view;
     public LayoutInflater mInflater;
     public Button retry;
+    private boolean isFirstLoad = true;
+    private boolean isVisible = false;
 
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser) {
+            isVisible = true;
+            lazyLoad();
+        } else {
+            isVisible = false;
+        }
+    }
 
     @Nullable
     @Override
@@ -54,25 +59,11 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
 
     public abstract MultiStateView initView(LayoutInflater inflater, ViewGroup container);
 
-
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         isInitView = true;
         lazyLoad();
     }
-
-    @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
-        if (isVisibleToUser) {
-            isVisible = true;
-            lazyLoad();
-        } else {
-            isVisible = false;
-        }
-    }
-
-    public abstract void getData();
 
     private void lazyLoad() {
         if (!isFirstLoad || !isVisible || !isInitView) {
@@ -84,28 +75,15 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
         isFirstLoad = false;
     }
 
+    public abstract void getData();
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.empty:
             case R.id.retry:
-                /**
-                 * 模拟网络请求延时2s
-                 */
                 state_view.setViewState(MultiStateView.VIEW_STATE_LOADING);
-                final Handler handler = new Handler() {
-                    @Override
-                    public void handleMessage(Message msg) {
-                        getData();
-                    }
-                };
-                Timer timer = new Timer();
-                timer.schedule(new TimerTask() {
-                    @Override
-                    public void run() {
-                        handler.sendEmptyMessage(0);
-                    }
-                }, 2000);
+                getData();
                 break;
         }
     }

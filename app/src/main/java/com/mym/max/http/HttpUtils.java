@@ -34,15 +34,18 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 
 public class HttpUtils {
+    // gankio、豆瓣、（轮播图）
+    private final static String API_GANKIO = "https://gank.io/api/";
+    private final static String API_DOUBAN = "https://api.douban.com/";
+    private final static String API_TING = "https://tingapi.ting.baidu.com/v1/restserver/";
+    private final static long DEFAULT_TIMEOUT = 10;
+    private final static long DEFAULT_READ_TIMEOUT = 20;
+    private final static long DEFAULT_WRITE_TIMEOUT = 20;
     private static HttpUtils instance;
     private Gson gson;
     private Object gankHttps;
     private Object doubanHttps;
     private Object dongtingHttps;
-    // gankio、豆瓣、（轮播图）
-    private final static String API_GANKIO = "https://gank.io/api/";
-    private final static String API_DOUBAN = "https://api.douban.com/";
-    private final static String API_TING = "https://tingapi.ting.baidu.com/v1/restserver/";
 
     public static HttpUtils getInstance() {
         if (!CheckNetwork.isNetworkConnected(UiUtils.getContext()) && !CheckNetwork.isWifiConnected(UiUtils.getContext())) {
@@ -69,28 +72,6 @@ public class HttpUtils {
         return (T) gankHttps;
     }
 
-    public <T> T getDouBanServer(Class<T> a) {
-        if (doubanHttps == null) {
-            synchronized (HttpUtils.class) {
-                if (doubanHttps == null) {
-                    doubanHttps = getBuilder(API_DOUBAN).build().create(a);
-                }
-            }
-        }
-        return (T) doubanHttps;
-    }
-
-    public <T> T getTingServer(Class<T> a) {
-        if (dongtingHttps == null) {
-            synchronized (HttpUtils.class) {
-                if (dongtingHttps == null) {
-                    dongtingHttps = getBuilder(API_TING).build().create(a);
-                }
-            }
-        }
-        return (T) dongtingHttps;
-    }
-
     private Retrofit.Builder getBuilder(String apiUrl) {
         Retrofit.Builder builder = new Retrofit.Builder();
         builder.baseUrl(apiUrl);
@@ -99,20 +80,6 @@ public class HttpUtils {
         builder.addCallAdapterFactory(RxJavaCallAdapterFactory.create());
         return builder;
     }
-
-    private Gson getGson() {
-        if (gson == null) {
-            GsonBuilder builder = new GsonBuilder();
-            builder.setLenient();
-            builder.serializeNulls();
-            gson = builder.create();
-        }
-        return gson;
-    }
-
-    private final static long DEFAULT_TIMEOUT = 10;
-    private final static long DEFAULT_READ_TIMEOUT = 20;
-    private final static long DEFAULT_WRITE_TIMEOUT = 20;
 
     private OkHttpClient getOkHttpClient() {
         try {
@@ -156,5 +123,37 @@ public class HttpUtils {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private Gson getGson() {
+        if (gson == null) {
+            GsonBuilder builder = new GsonBuilder();
+            builder.setLenient();
+            builder.serializeNulls();
+            gson = builder.create();
+        }
+        return gson;
+    }
+
+    public <T> T getDouBanServer(Class<T> a) {
+        if (doubanHttps == null) {
+            synchronized (HttpUtils.class) {
+                if (doubanHttps == null) {
+                    doubanHttps = getBuilder(API_DOUBAN).build().create(a);
+                }
+            }
+        }
+        return (T) doubanHttps;
+    }
+
+    public <T> T getTingServer(Class<T> a) {
+        if (dongtingHttps == null) {
+            synchronized (HttpUtils.class) {
+                if (dongtingHttps == null) {
+                    dongtingHttps = getBuilder(API_TING).build().create(a);
+                }
+            }
+        }
+        return (T) dongtingHttps;
     }
 }

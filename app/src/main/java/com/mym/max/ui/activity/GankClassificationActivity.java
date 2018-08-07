@@ -8,6 +8,7 @@ import android.support.v4.view.ViewPager;
 import com.mym.max.R;
 import com.mym.max.adapter.GankClassificationAdapter;
 import com.mym.max.base.BaseDataBindingActivity;
+import com.mym.max.ui.fragment.ClassficationFragment;
 import com.mym.max.ui.fragment.SfFragment;
 import com.mym.max.utils.StatusBarUtil;
 
@@ -16,6 +17,9 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+/**
+ * 干货分类
+ */
 public class GankClassificationActivity extends BaseDataBindingActivity {
 
     @BindView(R.id.tabLayout)
@@ -35,14 +39,14 @@ public class GankClassificationActivity extends BaseDataBindingActivity {
     private void initControls() {
         vpContent.setOffscreenPageLimit(8);
         final ArrayList<Fragment> listFragment = new ArrayList<>();
-        listFragment.add(new SfFragment());
-        listFragment.add(new SfFragment());
-        listFragment.add(new SfFragment());
-        listFragment.add(new SfFragment());
-        listFragment.add(new SfFragment());
-        listFragment.add(new SfFragment());
-        listFragment.add(new SfFragment());
-        listFragment.add(new SfFragment());
+        listFragment.add(new ClassficationFragment("Android"));
+        listFragment.add(new ClassficationFragment("iOS"));
+        listFragment.add(new ClassficationFragment("前端"));
+        listFragment.add(new ClassficationFragment("拓展资源"));
+        listFragment.add(new ClassficationFragment("福利"));
+        listFragment.add(new ClassficationFragment("瞎推荐"));
+        listFragment.add(new ClassficationFragment("App"));
+        listFragment.add(new ClassficationFragment("休息视频"));
         ArrayList<String> listTitle = new ArrayList<>();
         listTitle.add("Android");
         listTitle.add("iOS");

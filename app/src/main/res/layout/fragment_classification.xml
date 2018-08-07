@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="afvm"
+            type="com.mym.max.viewmodel.ClassificationFragmentViewModel" />
+    </data>
+
+    <com.mym.max.ui.view.MultiStateView
+        android:id="@+id/state_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:status="@{afvm.pageStatus}">
+
+        <com.aspsine.swipetoloadlayout.SwipeToLoadLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:loadMoreState="@{afvm.loadmoreState}"
+            app:refreshState="@{afvm.refreshState}"
+            app:setLoadMore="@{afvm.loadMoreListener}"
+            app:setRefresh="@{afvm.refreshListener}">
+
+            <com.mym.max.ui.view.RefreshHeaderView
+                android:id="@id/swipe_refresh_header"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:gravity="center" />
+
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@id/swipe_target"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorWhite"
+                app:adapter="@{afvm.adapter}"
+                app:data="@{afvm.data}"
+                app:layoutManager="@{afvm.linearLayoutManager}" />
+
+            <com.mym.max.ui.view.LoadMoreFooterView
+                android:id="@+id/swipe_load_more_footer"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:gravity="center" />
+
+        </com.aspsine.swipetoloadlayout.SwipeToLoadLayout>
+
+    </com.mym.max.ui.view.MultiStateView>
+</layout>
